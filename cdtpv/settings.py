@@ -27,6 +27,19 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# STATIC & MEDIA settings
+STATIC_URL = '/static/'
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+        STATIC_PATH,
+        )
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# TEMPLATES
+TEMPLATE_DIRS = ('',
+		os.path.join(BASE_DIR, 'templates/'),
+        )
 # Application definition
 
 INSTALLED_APPS = (
@@ -36,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
