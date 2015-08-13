@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from profiles.models import *
+from projects.models import Project, Upload, Upload_Type
 
 def user_login(request):
     invalid = False
@@ -34,12 +35,32 @@ def user_login(request):
             return render(request, 'login.html', {'invalid': invalid})
 
 def dashboard(request):
+    researcher=False
+    academic=False
+    portfolio=None
     try:
         profile = Researcher.objects.get(user=request.user)
+        projects = Project.objects.get(researcher=profile)
+        portfolio = Upload.objects.filter(researcher=profile)
+        types = Upload_Type.objects.all()
+        folio = {}
+        for type in types:
+            folio[type.name] =  portfolio.filter(type=type)
+        researcher = True
+        portfolio = folio
     except ObjectDoesNotExist:
         profile = Academic.objects.get(user=request.user)
+        projects = Project.objects.filter(supervisor1=profile)
+        academic = True
 
-    return render(request, 'dashboard.html', {'profile': profile})
+    prof_dict = {'profile': profile, 
+                 'projects': projects,
+                 'academic': academic,
+                 'researcher': researcher,
+                 'portfolio': portfolio,
+                 'types' : types}
+
+    return render(request, 'dashboard.html', prof_dict)
 
 def user_logout(request):
     logout(request)

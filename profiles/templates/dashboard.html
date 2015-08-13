@@ -7,16 +7,19 @@
             <div class="row">
                 <div class="col-lg-12">
 					<h2>{{profile.first_name}} {{profile.last_name}}</h2>
-					{% thumbnail profile.picture "150x150" crop="center" as im %}
+					{% thumbnail profile.pic "150x150" crop="center" as im %}
 					<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
 					{% endthumbnail %}
 					<h3>{{profile.affiliation}}</h3>
+                    {% if researcher %}
+                    <h4><a href="">{{ projects.cohort }}</a></h4>
+                    {% endif %}
 					<p>
 						{% if profile.url %}
 						<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
 						{% endif %}
-						{% if profile.linkedin %}
-						<a href="{{profile.linkedin}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+						{% if profile.linkedIn %}
+						<a href="{{profile.linkedIn}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
 						{% endif %}
 						{% if profile.twitter %}
 						<a href="{{profile.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
@@ -32,5 +35,60 @@
 			</div>
 		</div>
 	</section>
+
+    {% if researcher %}
+    <section id="projects" class="dashboard-project-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>My PhD</h2>
+					{% if projects  %}
+                    <h3 class="left">{{ projects.title }}</h3>
+                    <p class="left">{{ projects.description|linebreaks }}</p>
+					{% thumbnail projects.supervisor1.pic "150x150" crop="center" as im %}
+					<img class="profile-pic" src="{{im.url}}" name="{{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}">
+                    <p>{{ projects.supervisor1.title}} {{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}</p>
+                    <p>(First Supervisor)</p>
+					{% endthumbnail %}
+                    {% if projects.supervisor2 %}
+					{% thumbnail projects.supervisor2.pic "150x150" crop="center" as im %}
+					<img class="profile-pic" src="{{im.url}}" name="{{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}">
+                    <p>{{ projects.supervisor2.title}} {{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}</p>
+                    <p>(Second Supervisor)</p>
+					{% endthumbnail %}
+                    {% endif %}
+                    <p><strong>Start Date: </strong>{{projects.cohort.start}}, <strong>Finish Date: </strong>{{projects.cohort.finish}}</p>
+                    {% endif %}
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="">Update Project</a>
+					</div>
+
+                </div>
+            </div>
+		</div>
+    </section>
+
+    <section id="portfolio" class="white-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>{{portfolio}}</p>
+                    <p>{{portfolio.Paper}}</p>
+                    
+					<h2>My Portfolio</h2>
+                    {% for type in types %}
+                    <h3>{{type.name}}s</h3>
+                    {% endfor %}
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="">Add Item</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if academic %}
+    {% endif %}
 
 {% endblock %}
