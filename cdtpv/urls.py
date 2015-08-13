@@ -5,6 +5,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     url(r'^$', 'cdtpv.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^user/', include('profiles.urls')),
 )
 
 if settings.DEBUG:

@@ -1,5 +1,7 @@
 from django.db import models
 from sorl.thumbnail import ImageField
+from django.contrib.auth.models import User
+
 
 class Partner(models.Model):
     name = models.CharField(max_length=128)
@@ -9,7 +11,9 @@ class Partner(models.Model):
         return self.name
 
 class Academic(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True)
     title = models.CharField(max_length=5)
+    role = models.CharField(max_length= 50)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     affiliation = models.ForeignKey(Partner)
@@ -23,6 +27,7 @@ class Academic(models.Model):
         return self.last_name
 
 class Researcher(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     affiliation = models.ForeignKey(Partner)

@@ -6,5 +6,4 @@ admin.site.register(Element)
 admin.site.register(Assessment)
 admin.site.register(Submission)
 admin.site.register(Resource)
-admin.site.register(Resource_Type)
-
+admin.site.register(Feedback)

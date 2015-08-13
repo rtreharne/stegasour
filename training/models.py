@@ -40,7 +40,7 @@ class Assessment(models.Model):
 class Submission(models.Model):
     assessment = models.ForeignKey(Assessment)
     researcher = models.ForeignKey(Researcher)
-    file = models.FileField(blank=True, null=True)
+    file = models.FileField(upload_to='submission', blank=True, null=True)
     URL = models.URLField(blank = True)
 
     def __unicode__(self):
@@ -58,9 +58,26 @@ class Resource(models.Model):
     resource_type = models.ForeignKey(Resource_Type)
     upload = models.FileField(upload_to='resources/', blank=True, null=True)
     URL = models.URLField(blank=True)
+    CHOICE = (
+        (u'1', u'YES'),
+        (u'2', u'NO'),
+    )
+    public = models.CharField(max_length=3, choices=CHOICE, default=CHOICE[0][0])
 
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.element.module.tag)
+
+class Feedback(models.Model):
+    submission = models.ForeignKey(Submission)
+    feedback = models.TextField(blank=True)
+    score = models.DecimalField(max_digits=4, decimal_places=1, blank=True)
+    upload = models.FileField(upload_to='submission/feedback/', blank=True, null=True)
+
+    def __unicode__(self):
+        return '%s_%s (%s)' % (self.submission.assessment.title, self.submission.researcher.last_name, self.submission.assessment.element.module.name)
+        
+    
+
 
     
 
