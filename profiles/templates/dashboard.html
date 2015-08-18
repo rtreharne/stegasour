@@ -37,7 +37,7 @@
 	</section>
 
     {% if researcher %}
-    <section id="projects" class="dashboard-project-section">
+    <section id="projects" class="white-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -72,13 +72,73 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p>{{portfolio}}</p>
-                    <p>{{portfolio.Paper}}</p>
-                    
 					<h2>My Portfolio</h2>
-                    {% for type in types %}
-                    <h3>{{type.name}}s</h3>
-                    {% endfor %}
+					
+					<!--- Thesis ---!>
+                    {% if portfolio.Thesis%}
+					<h3>Thesiss</h3>
+					<ul>
+					   {% for item in portfolio.Thesis %}
+					       {% if item.upload %}
+						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
+						   {% elif item.URL %}
+						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
+						   {% else %}
+						   <li>{{ item.label }}</li>
+						   {% endif %}
+					   {% endfor %}
+					</ul>
+                    {% endif %}
+					
+					<!--- PAPERS ---!>
+                    {% if portfolio.Paper %}
+					<h3>Papers</h3>
+					<ul>
+					   {% for item in portfolio.Paper %}
+					       {% if item.upload %}
+						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
+						   {% elif item.URL %}
+						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
+						   {% else %}
+						   <li>{{ item.label }}</li>
+						   {% endif %}
+					   {% endfor %}
+					</ul>
+                    {% endif %}
+					
+					<!--- PRESENTATION ---!>
+                    {% if portfolio.Presentation %}
+					<h3>Presentations</h3>
+					<ul>
+					   {% for item in portfolio.Presentation %}
+					       {% if item.upload %}
+						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
+						   {% elif item.URL %}
+						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
+						   {% else %}
+						   <li>{{ item.label }}</li>
+						   {% endif %}
+					   {% endfor %}
+					</ul>
+                    {% endif %}
+
+					<!--- POSTERS ---!>
+                    {% if portfolio.Poster %}
+					<h3>Posters</h3>
+					<ul>
+					   {% for item in portfolio.Poster %}
+					       {% if item.upload %}
+						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
+						   {% elif item.URL %}
+						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
+						   {% else %}
+						   <li>{{ item.label }}</li>
+						   {% endif %}
+					   {% endfor %}
+					</ul>
+                    {% endif %}
+
+
 					<div class="col-lg-12 center">
 						<a class="btn btn-primary page-scroll" href="">Add Item</a>
 					</div>

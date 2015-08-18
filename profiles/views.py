@@ -57,8 +57,8 @@ def dashboard(request):
                  'projects': projects,
                  'academic': academic,
                  'researcher': researcher,
-                 'portfolio': portfolio,
-                 'types' : types}
+                 'portfolio': portfolio}
+                 
 
     return render(request, 'dashboard.html', prof_dict)
 
