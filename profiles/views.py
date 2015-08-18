@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from profiles.models import *
 from projects.models import Project, Upload, Upload_Type
+from training.models import *
 
 def user_login(request):
     invalid = False
@@ -38,12 +39,16 @@ def dashboard(request):
     researcher=False
     academic=False
     portfolio=None
+    submissions=None
+    feedback = []
     try:
         profile = Researcher.objects.get(user=request.user)
         projects = Project.objects.get(researcher=profile)
         portfolio = Upload.objects.filter(researcher=profile)
         types = Upload_Type.objects.all()
         folio = {}
+        submissions = Submission.objects.filter(researcher=profile)
+        feedback = Feedback.objects.all()
         for type in types:
             folio[type.name] =  portfolio.filter(type=type)
         researcher = True
@@ -57,7 +62,9 @@ def dashboard(request):
                  'projects': projects,
                  'academic': academic,
                  'researcher': researcher,
-                 'portfolio': portfolio}
+                 'portfolio': portfolio,
+                 'submissions': submissions,
+                 'feedback': feedback}
                  
 
     return render(request, 'dashboard.html', prof_dict)

@@ -70,7 +70,7 @@ class Resource(models.Model):
 class Feedback(models.Model):
     submission = models.ForeignKey(Submission)
     feedback = models.TextField(blank=True)
-    score = models.DecimalField(max_digits=4, decimal_places=1, blank=True)
+    score = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     upload = models.FileField(upload_to='submission/feedback/', blank=True, null=True)
 
     def __unicode__(self):

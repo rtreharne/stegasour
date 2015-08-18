@@ -68,6 +68,42 @@
 		</div>
     </section>
 
+    <section id="assessment" class="white-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>My Assessments</h2>
+					{% if submissions %}
+						<table class="tg">
+						  <tr>
+							<th class="tg-031e">Tag</th>
+							<th class="tg-031e">Title</th>
+							<th class="tg-031e">Element</th>
+							<th class="tg-031e">Module</th>
+							<th class="tg-031e">Points</th>
+							<th class="tg-031e">Submitted</th>
+							<th class="tg-031e">Feedback</th>
+						  </tr>
+						{% for submission in submissions %}
+						  <tr>
+							  <td class="tg-4eph">{{ submission.assessment.tag }}</td>
+							  <td class="tg-4eph">{{ submission.assessment.title }}</td>
+							  <td class="tg-4eph">{{ submission.assessment.element.tag }}</td>
+							  <td class="tg-4eph">{{ submission.assessment.element.module.tag }}</td>
+							  <td class="tg-4eph">{{ submission.assessment.points }}</td>
+							  <td class="tg-4eph"><a href="/media/{{ submission.file}}" target="_blank">file</a></td>
+							  <td class="tg-4eph">{% for item in feedback %}{% if item.submission == submission %}{{ item.feedback }}{% endif %}{% endfor %}</td>
+						  </tr>
+						{% endfor %}
+						</table>		
+					{% else %}
+					    <p>No assessments submitted<p>
+				    {% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+
     <section id="portfolio" class="white-section">
         <div class="container">
             <div class="row">
