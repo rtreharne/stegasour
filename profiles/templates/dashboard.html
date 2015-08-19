@@ -91,8 +91,8 @@
 							  <td class="tg-4eph">{{ submission.assessment.element.tag }}</td>
 							  <td class="tg-4eph">{{ submission.assessment.element.module.tag }}</td>
 							  <td class="tg-4eph">{{ submission.assessment.points }}</td>
-							  <td class="tg-4eph"><a href="/media/{{ submission.file}}" target="_blank">file</a></td>
-							  <td class="tg-4eph">{% for item in feedback %}{% if item.submission == submission %}{{ item.feedback }}{% endif %}{% endfor %}</td>
+							  <td class="tg-4eph"><a href="/media/{{ submission.file}}" target="_blank"><i class="fa fa-file fa-2x"></i></a></td>
+							  <td class="tg-4eph">{% for item in feedback %}{% if item.submission == submission %}<a href="feedback/{{item.id}}"><i class="fa fa-link fa-2x"></i></a>{% endif %}{% endfor %}</td>
 						  </tr>
 						{% endfor %}
 						</table>		
