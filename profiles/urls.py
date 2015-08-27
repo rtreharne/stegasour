@@ -6,4 +6,7 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', 'profiles.views.dashboard', name='dashboard'),
     url(r'login/$', 'profiles.views.user_login', name='login'),
     url(r'logout/$', 'profiles.views.user_logout', name='logout'),
+    url(r'^update_profile/$', 'profiles.views.update_profile', name='update_profile'),
+    url(r'^update_project/$', 'profiles.views.update_project', name='update_project'),
+    url(r'^add_portfolio_item/$', 'profiles.views.add_portfolio_item', name='add_portfolio_item')
 )
