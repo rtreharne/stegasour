@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from profiles.models import *
 from projects.models import Project, Upload, Upload_Type
 from training.models import *
+from profiles.forms import ProfileForm, ProjectForm, AddPortfolioForm
 
 def user_login(request):
     invalid = False
@@ -72,3 +73,91 @@ def dashboard(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('home'))
+
+@login_required
+def update_profile(request):
+    submitted = False
+    try:
+        inst = Researcher.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        inst = Academic.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        profile_form = ProfileForm(data=request.POST, instance=inst)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user= request.user
+
+            if 'pic' in request.FILES:
+                profile.pic= request.FILES['pic']
+
+            profile.save()
+
+            submitted=True
+
+        else:
+            print profile_form.errors
+        
+    else:
+        profile_form = ProfileForm(instance=inst)
+    
+    return render(request, 'update_profile.html', {'profile_form': profile_form, 'submitted': submitted})
+
+@login_required
+def update_project(request):
+    submitted = False
+    try:
+        inst = Project.objects.get(researcher=request.user)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse('dashboard'))
+
+    if request.method =='POST':
+        project_form = ProjectForm(data=request.POST, instance=inst)
+        if project_form.is_valid():
+            project = project_form.save(commit=False)
+            project.save()
+
+            submitted=True
+
+        else:
+            print project_form.errors
+
+    else:
+        project_form = ProjectForm(instance=inst)
+            
+    return render(request, 'update_project.html', {'project_form': project_form, 'submitted': submitted})
+
+@login_required
+def add_portfolio_item(request):
+    submitted = False
+    try:  
+        inst = Project.objects.get(researcher=request.user)
+    except ObjectDoesNotExist:
+	    return HttpResponseRedirect(reverse('dashboard'))
+
+    if request.method == 'POST':
+        upload_form = AddPortfolioForm(data=request.POST)
+        if upload_form.is_valid():
+            upload = upload_form.save(commit=False)
+
+            upload.researcher = inst.researcher
+
+            if 'upload' in request.FILES:
+                upload.upload = request.FILES['upload']
+
+            upload.save()
+			
+            submitted = True
+
+        else:
+            print upload_form.erros
+
+    else:
+        upload_form = AddPortfolioForm()
+
+	
+    return render(request, 'add_portfolio_item.html', {'upload_form': upload_form, 'submitted': submitted})
+
+
+	    
+			

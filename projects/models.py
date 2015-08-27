@@ -16,7 +16,7 @@ class Project(models.Model):
     supervisor2 = models.ForeignKey(Academic, related_name='supervisor2', null=True, blank=True)
     researcher = models.OneToOneField(Researcher, null=True, blank=True)
     title = models.CharField(max_length=500)
-    cohort = models.ForeignKey(Cohort)
+    cohort = models.ForeignKey(Cohort, blank=True, null=True)
     description = models.TextField(max_length = 10000, blank=True)
     attachment = models.FileField(upload_to='projects', blank=True, null=True)
     
