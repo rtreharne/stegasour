@@ -150,13 +150,19 @@ def add_portfolio_item(request):
             submitted = True
 
         else:
-            print upload_form.erros
+            print upload_form.errors
 
     else:
         upload_form = AddPortfolioForm()
 
 	
     return render(request, 'add_portfolio_item.html', {'upload_form': upload_form, 'submitted': submitted})
+
+@login_required
+def delete_portfolio_item(request, upload_id=1):
+    upload = Upload.objects.get(id=upload_id)
+    upload.delete()
+    return HttpResponseRedirect('/user/dashboard/#portfolio')
 
 
 	    

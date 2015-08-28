@@ -94,6 +94,22 @@ p.justify {
     background-color: #eee;
 }
 
+.portfolio-ul {
+	margin-left: 20px;
+}
+
+.portfolio-ul li {
+	margin: 20px;
+}
+
+.upload-tools {
+	color: red;
+}
+
+.upload-tools:hover {
+	color: green;
+}
+
 .articles {
     width: 98%;
     max-width: 600px;

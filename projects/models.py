@@ -32,9 +32,9 @@ class Upload_Type(models.Model):
 class Upload(models.Model):
     type = models.ForeignKey(Upload_Type)
     researcher = models.ForeignKey(Researcher)
-    label = models.CharField(max_length=128)
+    label = models.CharField(max_length=500)
     upload = models.FileField(upload_to='upload', null=True, blank=True)
-    URL = models.URLField(blank=True)
+    URL = models.URLField(blank=True, null=True)
     CHOICE = (
         (u'1', u'YES'),
         (u'2', u'NO'),

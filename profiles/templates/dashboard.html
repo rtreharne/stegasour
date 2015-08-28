@@ -112,16 +112,19 @@
 					
 					<!--- Thesis ---!>
                     {% if portfolio.Thesis%}
-					<h3>Thesiss</h3>
-					<ul>
+					<h3>Thesis</h3>
+					<ul class="portfolio-ul">
 					   {% for item in portfolio.Thesis %}
-					       {% if item.upload %}
-						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
-						   {% elif item.URL %}
-						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
-						   {% else %}
-						   <li>{{ item.label }}</li>
-						   {% endif %}
+						   <li>
+							   {% if item.upload %}
+							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a> <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+							   {% elif item.URL %}
+							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a> 
+							   {% else %}
+							   {{ item.label }}
+							   {% endif %}
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+					       </li>
 					   {% endfor %}
 					</ul>
                     {% endif %}
@@ -129,15 +132,18 @@
 					<!--- PAPERS ---!>
                     {% if portfolio.Paper %}
 					<h3>Papers</h3>
-					<ul>
+					<ul class="portfolio-ul">
 					   {% for item in portfolio.Paper %}
-					       {% if item.upload %}
-						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
-						   {% elif item.URL %}
-						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
-						   {% else %}
-						   <li>{{ item.label }}</li>
-						   {% endif %}
+						   <li>
+							   {% if item.upload %}
+							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+							   {% elif item.URL %}
+							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+							   {% else %}
+							   {{ item.label }}
+							   {% endif %}
+							   ... <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+					       </li>
 					   {% endfor %}
 					</ul>
                     {% endif %}
@@ -145,15 +151,18 @@
 					<!--- PRESENTATION ---!>
                     {% if portfolio.Presentation %}
 					<h3>Presentations</h3>
-					<ul>
+					<ul class="portfolio-ul">
 					   {% for item in portfolio.Presentation %}
-					       {% if item.upload %}
-						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
-						   {% elif item.URL %}
-						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
-						   {% else %}
-						   <li>{{ item.label }}</li>
-						   {% endif %}
+						   <li>
+							   {% if item.upload %}
+							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+							   {% elif item.URL %}
+							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+							   {% else %}
+							   {{ item.label }}
+							   {% endif %}
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+					       </li>
 					   {% endfor %}
 					</ul>
                     {% endif %}
@@ -161,15 +170,18 @@
 					<!--- POSTERS ---!>
                     {% if portfolio.Poster %}
 					<h3>Posters</h3>
-					<ul>
+					<ul class="portfolio-ul">
 					   {% for item in portfolio.Poster %}
-					       {% if item.upload %}
-						   <li><a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a></li>
-						   {% elif item.URL %}
-						   <li><a href="{{ item.URL}}" target="_blank">{{ item.label }}</a></li>
-						   {% else %}
-						   <li>{{ item.label }}</li>
-						   {% endif %}
+						   <li>
+							   {% if item.upload %}
+							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+							   {% elif item.URL %}
+							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+							   {% else %}
+							   {{ item.label }}
+							   {% endif %}
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+					       </li>
 					   {% endfor %}
 					</ul>
                     {% endif %}
