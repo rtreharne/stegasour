@@ -3,6 +3,13 @@
     width: 100%;
 }
 
+h2 {
+	margin-bottom: 20px
+}
+h4.cohort {
+	margin-bottom: 20px;
+}
+
 
 /*------BUTTONS-------*/
 .btn-primary {
@@ -94,6 +101,13 @@ p.justify {
     background-color: #eee;
 }
 
+.student-section {
+	background: #eee;
+    padding-top: 15px;
+    text-align:center;
+    padding-bottom: 50px;
+}
+
 .portfolio-ul {
 	margin-left: 20px;
 }
@@ -121,6 +135,11 @@ form input#id_upload {
 	width:80%;
 }
 
+div.supervisor {
+	display: inline-block;
+	margin: 10px;
+}
+
 .articles {
     width: 98%;
     max-width: 600px;
@@ -142,6 +161,13 @@ form input#id_upload {
 
 .profile-pic-lg {
     width: 150px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
+
+.profile-pic-sm {
+    width: 70px;
     border-radius: 150px;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
@@ -280,12 +306,8 @@ p.small {
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-	min-height: 100%;
 }
 
-.dashboard-profile-section img {
-	max-width: 150px;
-}
 
 .dashboard-project-section {
     background: #eee;
@@ -294,16 +316,34 @@ p.small {
     padding-bottom: 50px;
 }
 
+.dashboard-portfolio-section {
+    background: #fff;
+    padding-top: 15px;
+    text-align:center;
+    padding-bottom: 50px;
+}
+
+div.portfolio {
+	text-align: left;
+}
+
 .dashboard-profile-section i.fa {
 		margin: 1%;
 }
 
-.dashboard-profile-section p.bio {
+.dashboard-profile-section p.bio, .dashboard-project-section div.bio {
 	max-width:500px;
 	text-align:justify;
 	margin: 2% auto;
 	margin-top: 15px;
 	margin-bottom: 25px;
+}
+
+img.partner-logo {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 /*---------PROGRAMME---------*/
 /*---------Abstracts---------*/
@@ -469,4 +509,20 @@ path.line {
 .chart .label{
 	font-weight: 400;
 	font-size: 1em;
+}
+
+hr.score {
+	margin: 0;
+	border-top: 5px solid #334d64;
+}
+/* ---------- directory -----------*/
+.cohort-section {
+    padding-top: 15px;
+    text-align:center;
+    padding-bottom: 50px;
+}
+
+.cohort-section:nth-of-type(even){
+	background: #eee;
+}
 }

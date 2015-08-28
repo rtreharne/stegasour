@@ -6,6 +6,8 @@ urlpatterns = patterns('',
     url(r'^$', 'cdtpv.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('profiles.urls')),
+    url(r'^directory/researchers/', 'cdtpv.views.researchers', name='researchers'),
+    url(r'^directory/academics/', 'cdtpv.views.academics', name='academics'),
 )
 
 if settings.DEBUG:

@@ -4,6 +4,8 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'^dashboard/$', 'profiles.views.dashboard', name='dashboard'),
+    url(r'^profile/academic/(?P<profile_id>\d+)/$', 'profiles.views.academic_profile', name='profile'),
+    url(r'^profile/researcher/(?P<profile_id>\d+)/$', 'profiles.views.researcher_profile', name='profile'),
     url(r'login/$', 'profiles.views.user_login', name='login'),
     url(r'logout/$', 'profiles.views.user_logout', name='logout'),
     url(r'^update_profile/$', 'profiles.views.update_profile', name='update_profile'),

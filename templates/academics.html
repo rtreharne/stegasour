@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+<div style="padding-top: 50px;">
+	<section  class="cohort-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>Academic Members</h2>
+					{% for academic in academics %}
+					<a href="/user/profile/academic/{{academic.id}}/">
+						<div style="min-height: 110px;" class="col-md-2 col-sm-3 col-xs-4">
+							{% thumbnail academic.pic "150x150" crop="center" as im %}
+							<img class="profile-pic" src="{{im.url}}" name="{{academic.first_name}} {{academic.last_name}}">
+							<p>{{academic.first_name}} {{academic.last_name}}</p>
+							{% endthumbnail %}
+						</div>
+				    </a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

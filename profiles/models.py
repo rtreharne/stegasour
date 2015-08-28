@@ -32,7 +32,7 @@ class Researcher(models.Model):
     last_name = models.CharField(max_length=128)
     affiliation = models.ForeignKey(Partner)
     bio = models.TextField(max_length=2000, blank=True)
-    pic = ImageField(upload_to='researcher_images', default='static/img/avatar.png')
+    pic = ImageField(upload_to='researcher_images', default='static/img/eintein.jpg')
     url = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
     linkedIn = models.URLField(blank=True)

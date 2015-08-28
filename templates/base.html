@@ -59,14 +59,38 @@
                     <li class="hidden">
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
+					
+					
+                    <li>
+                        <a class="page-scroll" href="">Projects</a>
+                    </li>
+					
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Directory<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+							<li><a href="{% url 'researchers' %}">Researchers</a></li>
+							<li><a href="{% url 'academics' %}">Academics</a></li>
+						</ul>
+					</li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+							<li><a href="">Handbook</a></li>
+							<li><a href="">Core Modules</a></li>
+							<li><a href="">Lecture Archive</a></li>
+						</ul>
+					</li>
 				</ul>
+							
                 <ul class="nav navbar-nav navbar-right">
 					
 		    {% if user.is_authenticated %}
 			<li class="dropdown">
 			    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>{{user.username}}</strong><span class="caret"></span></a>
 			    <ul class="dropdown-menu">
-					<li><a href="{% url 'dashboard' %}"><i class="fa fa-dashcube"></i> Dashboard</a></li>
+					<li><a href="{% url 'dashboard' %}"><i class="fa fa-user"></i> Dashboard</a></li>
+					<li><a href=""><i class="fa fa-check-square-o"></i> Assessment</a></li>
 					<li><a href="{% url 'logout' %}"><strong><i class="fa fa-sign-out"></i> Logout</strong></a></li>
 			    </ul>
 			</li>

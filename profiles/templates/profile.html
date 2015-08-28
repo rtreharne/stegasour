@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+    <section id="register" class="dashboard-profile-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>{{profile.first_name}} {{profile.last_name}}</h2>
+					<h4 class="cohort"><a href="/directory/researchers/#{{projects.cohort.id}}">{{ projects.cohort }}</a></h4>
+					{% thumbnail profile.pic "150x150" crop="center" as im %}
+					<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
+					{% endthumbnail %}
+					
+					{% thumbnail profile.affiliation.logo "200x200" as im %}
+					<img class="partner-logo" src="{{im.url}}">
+					{% endthumbnail %}
+					
+                    {% if researcher %}
+                    {% endif %}
+					<p>
+						{% if profile.url %}
+						<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
+						{% endif %}
+						{% if profile.linkedIn %}
+						<a href="{{profile.linkedIn}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+						{% endif %}
+						{% if profile.twitter %}
+						<a href="{{profile.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+						{% endif %}
+					</p>
+					{% if profile.bio %}
+					<p class="bio">{{profile.bio}}</p>
+					{% else %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<hr class="score">
+
+    {% if researcher %}
+    <section id="projects" class="dashboard-project-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>PhD Project</h2>
+					{% if projects  %}
+                    <h3 class="left">{{ projects.title }}</h3>
+					<div class="bio">{{ projects.description|linebreaks }}</div>
+					<h3>Supervisors</h3>
+					<a href="/user/profile/academic/{{ projects.supervisor1.id }}/">
+						<div class="supervisor">
+							{% thumbnail projects.supervisor1.pic "150x150" crop="center" as im %}
+							<img class="profile-pic-sm" src="{{im.url}}" name="{{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}">
+							<p>{{ projects.supervisor1.title}} {{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}</p>
+							{% endthumbnail %}
+						</div>
+					</a>
+					{% if projects.supervisor2 %}
+					<a href="/user/profile/academic/{{ projects.supervisor2.id }}/">
+						<div class="supervisor">
+							{% thumbnail projects.supervisor2.pic "150x150" crop="center" as im %}
+							<img class="profile-pic-sm" src="{{im.url}}" name="{{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}">
+							<p>{{ projects.supervisor2.title}} {{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}</p>
+							{% endthumbnail %}
+						</div>
+					</a>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+		</div>
+    </section>
+
+	<hr class="score">
+
+
+	{% if portfolio %}
+    <section id="portfolio" class="dashboard-portfolio-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>Portfolio</h2>
+					<div class="portfolio"
+						<!--- Thesis ---!>
+						{% if portfolio.Thesis%}
+						<h3>Thesis</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Thesis %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a> 
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- PAPERS ---!>
+						{% if portfolio.Paper %}
+						<h3>Papers</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Paper %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- PRESENTATION ---!>
+						{% if portfolio.Presentation %}
+						<h3>Presentations</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Presentation %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+
+						<!--- POSTERS ---!>
+						{% if portfolio.Poster %}
+						<h3>Posters</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Poster %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- OTHER ---!>
+						{% if portfolio.Other %}
+						<h3>Other</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Other %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+	{% endif %}
+
+
+    {% endif %}
+
+    {% if academic %}
+    <section id="students" class="student-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>Students</h2>
+					{% if projects  %}
+					    {% for project in projects %}
+						<a href="/user/profile/researcher/{{project.researcher.id}}/">
+							<div style="min-height: 110px;" class="col-md-2 col-sm-3 col-xs-4">
+								{% thumbnail project.researcher.pic "150x150" crop="center" as im %}
+								<img class="profile-pic" src="{{im.url}}" name="{{project.researcher.user.first_name}} {{project.researcher.user.last_name}}">
+								<p>{{project.researcher.first_name}} {{project.researcher.last_name}}</p>
+							{% endthumbnail %}
+							</div>
+						</a>
+						{% endfor %}
+					{% endif %}
+                </div>
+            </div>
+		</div>
+    </section>
+    {% endif %}
+
+{% endblock %}

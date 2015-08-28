@@ -7,12 +7,16 @@
             <div class="row">
                 <div class="col-lg-12">
 					<h2>{{profile.first_name}} {{profile.last_name}}</h2>
+					<h4><a href="/directory/researchers/#{{projects.cohort.id}}/">{{ projects.cohort }}</a></h4>
 					{% thumbnail profile.pic "150x150" crop="center" as im %}
 					<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
 					{% endthumbnail %}
-					<h3>{{profile.affiliation}}</h3>
+
+					{% thumbnail profile.affiliation.logo "200x200" as im %}
+					<img class="partner-logo" src="{{im.url}}">
+					{% endthumbnail %}
+					
                     {% if researcher %}
-                    <h4><a href="">{{ projects.cohort }}</a></h4>
                     {% endif %}
 					<p>
 						{% if profile.url %}
@@ -27,6 +31,8 @@
 					</p>
 					{% if profile.bio %}
 					<p class="bio">{{profile.bio}}</p>
+					{% else %}
+					<p>[No bio added]</p>
 					{% endif %}
 					<div class="col-lg-12 center">
 						<a class="btn btn-primary page-scroll" href="/user/update_profile/">Update Profile</a>
@@ -35,29 +41,39 @@
 			</div>
 		</div>
 	</section>
+	
+	<hr class="score">
 
     {% if researcher %}
-    <section id="projects" class="white-section">
+    <section id="projects" class="dashboard-project-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-					<h2>My PhD</h2>
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>PhD Project</h2>
 					{% if projects  %}
                     <h3 class="left">{{ projects.title }}</h3>
-                    <p class="left">{{ projects.description|linebreaks }}</p>
-					{% thumbnail projects.supervisor1.pic "150x150" crop="center" as im %}
-					<img class="profile-pic" src="{{im.url}}" name="{{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}">
-                    <p>{{ projects.supervisor1.title}} {{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}</p>
-                    <p>(First Supervisor)</p>
-					{% endthumbnail %}
-                    {% if projects.supervisor2 %}
-					{% thumbnail projects.supervisor2.pic "150x150" crop="center" as im %}
-					<img class="profile-pic" src="{{im.url}}" name="{{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}">
-                    <p>{{ projects.supervisor2.title}} {{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}</p>
-                    <p>(Second Supervisor)</p>
-					{% endthumbnail %}
+					{% if projects.description %}
+					<div class="bio">{{ projects.description|linebreaks }}</div>
+					{% else %}
+					<p>[No project description added]</p>
+					{% endif %}
+					<h3>Supervisors</h3>
+					<a href="/user/profile/academic/{{projects.supervisor1.id}}/">
+					<div class="supervisor">
+						{% thumbnail projects.supervisor1.pic "150x150" crop="center" as im %}
+						<img class="profile-pic-sm" src="{{im.url}}" name="{{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}">
+						<p>{{ projects.supervisor1.title}} {{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}</p>
+						{% endthumbnail %}
+				</div></a>
+					<a href="/user/profile/academic/{{projects.supervisor2.id}}/">
+					<div class="supervisor">
+						{% if projects.supervisor2 %}
+						{% thumbnail projects.supervisor2.pic "150x150" crop="center" as im %}
+						<img class="profile-pic-sm" src="{{im.url}}" name="{{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}">
+						<p>{{ projects.supervisor2.title}} {{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}</p>
+						{% endthumbnail %}
+				</div></a>
                     {% endif %}
-                    <p><strong>Start Date: </strong>{{projects.cohort.start}}, <strong>Finish Date: </strong>{{projects.cohort.finish}}</p>
                     {% endif %}
 					<div class="col-lg-12 center">
 						<a class="btn btn-primary page-scroll" href="/user/update_project/">Update Project</a>
@@ -68,11 +84,136 @@
 		</div>
     </section>
 
-    <section id="assessment" class="white-section">
+	<hr class="score">
+
+
+    <section id="portfolio" class="dashboard-portfolio-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-					<h2>My Assessments</h2>
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>Portfolio</h2>
+					<div class="portfolio">
+					{% if portfolio %}
+						<!--- Thesis ---!>
+						{% if portfolio.Thesis%}
+						<h3>Thesis</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Thesis %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a> 
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+								   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+								   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- PAPERS ---!>
+						{% if portfolio.Paper %}
+						<h3>Papers</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Paper %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+								   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+								   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- PRESENTATION ---!>
+						{% if portfolio.Presentation %}
+						<h3>Presentations</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Presentation %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+								   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+								   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+
+						<!--- POSTERS ---!>
+						{% if portfolio.Poster %}
+						<h3>Posters</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Poster %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+								   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+								   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+						
+						<!--- OTHER ---!>
+						{% if portfolio.Other %}
+						<h3>Other</h3>
+						<ul class="portfolio-ul">
+						   {% for item in portfolio.Other %}
+							   <li>
+								   {% if item.upload %}
+								   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
+								   {% elif item.URL %}
+								   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
+								   {% else %}
+								   {{ item.label }}
+								   {% endif %}
+								   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+								   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   </li>
+						   {% endfor %}
+						</ul>
+						{% endif %}
+					{% else %}
+					<p>[No portfolio items added]</p>
+					{% endif %}
+					</div>
+
+
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="/user/add_portfolio_item">Add Item</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!--
+    <section id="assessment" class="dashboard-portfolio-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>Assessments</h2>
 					{% if submissions %}
 						<table class="tg">
 						  <tr>
@@ -103,104 +244,29 @@
 			</div>
 		</div>
 	</section>
-
-    <section id="portfolio" class="white-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-					<h2>My Portfolio</h2>
-					
-					<!--- Thesis ---!>
-                    {% if portfolio.Thesis%}
-					<h3>Thesis</h3>
-					<ul class="portfolio-ul">
-					   {% for item in portfolio.Thesis %}
-						   <li>
-							   {% if item.upload %}
-							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
-							   {% elif item.URL %}
-							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a> 
-							   {% else %}
-							   {{ item.label }}
-							   {% endif %}
-							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
-					       </li>
-					   {% endfor %}
-					</ul>
-                    {% endif %}
-					
-					<!--- PAPERS ---!>
-                    {% if portfolio.Paper %}
-					<h3>Papers</h3>
-					<ul class="portfolio-ul">
-					   {% for item in portfolio.Paper %}
-						   <li>
-							   {% if item.upload %}
-							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
-							   {% elif item.URL %}
-							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
-							   {% else %}
-							   {{ item.label }}
-							   {% endif %}
-							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
-					       </li>
-					   {% endfor %}
-					</ul>
-                    {% endif %}
-					
-					<!--- PRESENTATION ---!>
-                    {% if portfolio.Presentation %}
-					<h3>Presentations</h3>
-					<ul class="portfolio-ul">
-					   {% for item in portfolio.Presentation %}
-						   <li>
-							   {% if item.upload %}
-							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
-							   {% elif item.URL %}
-							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
-							   {% else %}
-							   {{ item.label }}
-							   {% endif %}
-							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
-					       </li>
-					   {% endfor %}
-					</ul>
-                    {% endif %}
-
-					<!--- POSTERS ---!>
-                    {% if portfolio.Poster %}
-					<h3>Posters</h3>
-					<ul class="portfolio-ul">
-					   {% for item in portfolio.Poster %}
-						   <li>
-							   {% if item.upload %}
-							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
-							   {% elif item.URL %}
-							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a>
-							   {% else %}
-							   {{ item.label }}
-							   {% endif %}
-							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
-					       </li>
-					   {% endfor %}
-					</ul>
-                    {% endif %}
-
-
-					<div class="col-lg-12 center">
-						<a class="btn btn-primary page-scroll" href="/user/add_portfolio_item">Add Item</a>
-					</div>
-                </div>
-            </div>
-        </div>
-    </section>
+-->
     {% endif %}
 
     {% if academic %}
+    <section id="projects" class="dashboard-student-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+					<h2>Students</h2>
+					{% if projects  %}
+					    {% for project in projects %}
+						<a href="/user/profile/researcher/{{project.researcher.id}}/"><div class="supervisor">
+							{% thumbnail project.researcher.pic "150x150" crop="center" as im %}
+							<img class="profile-pic" src="{{im.url}}" name="{{project.researcher.first_name}} {{project.researcher.last_name}}">
+							<p>{{project.researcher.first_name}} {{project.researcher.last_name}}</p>
+							{% endthumbnail %}
+						</div></a>
+						{% endfor %}
+					{% endif %}
+                </div>
+            </div>
+		</div>
+    </section>
     {% endif %}
 
 {% endblock %}

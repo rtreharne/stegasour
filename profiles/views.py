@@ -10,6 +10,7 @@ from profiles.models import *
 from projects.models import Project, Upload, Upload_Type
 from training.models import *
 from profiles.forms import ProfileForm, ProjectForm, AddPortfolioForm, EditPortfolioForm
+from itertools import chain
 
 def user_login(request):
     invalid = False
@@ -184,3 +185,41 @@ def edit_portfolio_item(request, upload_id=1):
         upload_form = EditPortfolioForm(instance=inst)
             
 	return render(request, 'edit_portfolio_item.html', {'upload_form': upload_form, 'submitted': submitted, 'upload_id': upload_id})
+
+
+def researcher_profile(request, profile_id):
+    
+    researcher=True
+    profile = Researcher.objects.get(id=profile_id)
+    projects = Project.objects.get(researcher=profile)
+    portfolio = Upload.objects.filter(researcher=profile)
+    types = Upload_Type.objects.all()
+    folio = {}
+    
+    for type in types:
+        folio[type.name] =  portfolio.filter(type=type)
+    
+    portfolio = folio
+    
+    prof_dict = {'profile': profile, 
+                 'projects': projects,
+                 'researcher': researcher,
+                 'portfolio': portfolio}
+                 
+
+    return render(request, 'profile.html', prof_dict)
+
+def academic_profile(request, profile_id):
+    academic=True
+    profile = Academic.objects.get(id=profile_id)
+    projects1 = Project.objects.filter(supervisor1=profile)
+    projects2 = Project.objects.filter(supervisor2=profile)
+    projects = list(chain(projects1, projects2))
+    academic = True
+
+    prof_dict = {'profile': profile, 
+                 'projects': projects,
+                 'academic': academic}
+                 
+
+    return render(request, 'profile.html', prof_dict)

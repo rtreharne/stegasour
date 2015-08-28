@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+<div style="padding-top: 50px;">
+    {% for cohort in cohorts %}
+	<section id="{{cohort.id}}" class="cohort-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+					<h2>{{cohort.name}}</h2>
+					<a href="https://twitter.com/hashtag/{{cohort.tag}}" target="_blank"><h4>#{{cohort.tag}}</a></h4>
+					{% for project in projects %}
+					{% if project.cohort == cohort %}
+					<a href="/user/profile/researcher/{{project.researcher.id}}/">
+						<div style="min-height: 110px;" class="col-md-2 col-sm-3 col-xs-4">
+							{% thumbnail project.researcher.pic "150x150" crop="center" as im %}
+							<img class="profile-pic" src="{{im.url}}" name="{{project.researcher.user.first_name}} {{project.researcher.user.last_name}}">
+							<p>{{project.researcher.first_name}} {{project.researcher.last_name}}</p>
+							{% endthumbnail %}
+						</div>
+				    </a>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endfor %}
+</div>
+	
+
+{% endblock %}
