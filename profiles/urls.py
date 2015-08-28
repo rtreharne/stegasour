@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^update_profile/$', 'profiles.views.update_profile', name='update_profile'),
     url(r'^update_project/$', 'profiles.views.update_project', name='update_project'),
     url(r'^add_portfolio_item/$', 'profiles.views.add_portfolio_item', name='add_portfolio_item'),
-    url(r'^delete_portfolio_item/(?P<upload_id>\d+)/$', 'profiles.views.delete_portfolio_item', name='delete__portfolio_item')
+    url(r'^delete_portfolio_item/(?P<upload_id>\d+)/$', 'profiles.views.delete_portfolio_item', name='delete_portfolio_item'),
+    url(r'^edit_portfolio_item/(?P<upload_id>\d+)/$', 'profiles.views.edit_portfolio_item', name='edit_portfolio_item')
 	
 )

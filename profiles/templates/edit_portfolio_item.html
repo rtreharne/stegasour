@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="register" class="register-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-sm-offset-2">
+					<h2>Update Portfolio Item</h2>
+
+					{% if submitted %}
+					<p>Your item has been updated</p>
+					<a href="{% url 'dashboard' %}">Return to dashboard</a>
+					{% else %}
+
+					<form id = "upload_form" method="post" action="/user/edit_portfolio_item/{{upload_id}}/" enctype="multipart/form-data">
+
+						{% csrf_token %}
+
+						<ul>
+							<li><label>Title:</label>{{upload_form.label}}</li>
+							<li><label>Type:</label>{{upload_form.type}}</li>
+							<li><label>File Upload:</label><div class="file-input">{{upload_form.upload}}</div></li>
+							<li><label>URL:</label>{{upload_form.URL}}</li>
+							<li><label>Public?:</label>{{upload_form.public}}</li>
+						</ul>
+
+						<input class="btn btn-primary page-scroll" type="submit" name="submit" value="Save" />
+
+					</form>
+					<div class="col-lg-12 center">
+						<a class="btn btn-primary page-scroll" href="{% url 'dashboard' %}">Cancel</a>
+					</div>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

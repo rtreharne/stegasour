@@ -23,3 +23,9 @@ class AddPortfolioForm(forms.ModelForm):
     class Meta:
         model = Upload
         fields = ('type', 'label', 'upload', 'URL', 'public')
+
+class EditPortfolioForm(forms.ModelForm):
+    
+    class Meta:
+        model = Upload
+        fields = ('type', 'label', 'upload', 'URL', 'public')

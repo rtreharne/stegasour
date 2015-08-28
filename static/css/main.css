@@ -110,6 +110,17 @@ p.justify {
 	color: green;
 }
 
+label[for="upload-clear_id"] {
+	display: none;
+}
+input[id="upload-clear_id"] {
+	display:none;
+}
+form input#id_upload {
+	display: inline-block;
+	width:80%;
+}
+
 .articles {
     width: 98%;
     max-width: 600px;
@@ -370,6 +381,7 @@ form div.file-input {
 	width:90%;
 	max-width:350px;
 	margin:auto;
+	margin-top: -4px;
 	line-height: 2em;
 }
 form input#id_picture {

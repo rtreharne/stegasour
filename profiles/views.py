@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from profiles.models import *
 from projects.models import Project, Upload, Upload_Type
 from training.models import *
-from profiles.forms import ProfileForm, ProjectForm, AddPortfolioForm
+from profiles.forms import ProfileForm, ProjectForm, AddPortfolioForm, EditPortfolioForm
 
 def user_login(request):
     invalid = False
@@ -164,6 +164,23 @@ def delete_portfolio_item(request, upload_id=1):
     upload.delete()
     return HttpResponseRedirect('/user/dashboard/#portfolio')
 
+@login_required
+def edit_portfolio_item(request, upload_id=1):
+    submitted = False
+    inst = Upload.objects.get(id=upload_id)
 
-	    
-			
+    if request.method =='POST':
+        upload_form = EditPortfolioForm(data=request.POST, instance=inst)
+        if upload_form.is_valid():
+            upload = upload_form.save()
+
+            submitted=True
+            return HttpResponseRedirect('/user/dashboard/#portfolio')
+
+        else:
+            print upload_form.errors
+
+    else:
+        upload_form = EditPortfolioForm(instance=inst)
+            
+	return render(request, 'edit_portfolio_item.html', {'upload_form': upload_form, 'submitted': submitted, 'upload_id': upload_id})

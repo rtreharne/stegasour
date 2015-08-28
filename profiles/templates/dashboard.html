@@ -117,13 +117,14 @@
 					   {% for item in portfolio.Thesis %}
 						   <li>
 							   {% if item.upload %}
-							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a> <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+							   <a href="/media/{{ item.upload|safe }}" target="_blank">{{ item.label }}</a>
 							   {% elif item.URL %}
 							   <a href="{{ item.URL}}" target="_blank">{{ item.label }}</a> 
 							   {% else %}
 							   {{ item.label }}
 							   {% endif %}
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
 					       </li>
 					   {% endfor %}
 					</ul>
@@ -142,7 +143,8 @@
 							   {% else %}
 							   {{ item.label }}
 							   {% endif %}
-							   ... <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
+							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
 					       </li>
 					   {% endfor %}
 					</ul>
@@ -161,7 +163,8 @@
 							   {% else %}
 							   {{ item.label }}
 							   {% endif %}
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
 					       </li>
 					   {% endfor %}
 					</ul>
@@ -180,7 +183,8 @@
 							   {% else %}
 							   {{ item.label }}
 							   {% endif %}
-							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">delete</a>
+							   ... <a class="upload-tools" href="/user/edit_portfolio_item/{{item.id}}">[edit]</a>
+							   <a class="upload-tools" href="/user/delete_portfolio_item/{{item.id}}">[delete]</a>
 					       </li>
 					   {% endfor %}
 					</ul>
