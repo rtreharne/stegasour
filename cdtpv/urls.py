@@ -4,6 +4,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'^$', 'cdtpv.views.home', name='home'),
+    url(r'^handbook/$', 'cdtpv.views.handbook', name='handbook'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('profiles.urls')),
     url(r'^directory/researchers/', 'cdtpv.views.researchers', name='researchers'),

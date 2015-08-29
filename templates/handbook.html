@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+
+<style>
+body {
+	padding-top:50px;
+	text-align:justify;
+}
+
+#masthead {
+	min-height:150px;
+	background-color:#000044;
+  	color:#aaaacc;
+	padding-top: 50px;
+}
+
+#masthead h1 {
+	font-size: 55px;
+	line-height: 1;
+}
+
+#masthead .well {
+	margin-top:13%;
+	background-color:#111155;
+  	border-color:#000033;
+}
+
+.icon-bar {
+	background-color:#fff;
+}
+
+.navbar-bright {
+	background-color:#111155;
+    color:#fff;
+}
+  
+.navbar-bright a, #masthead a, #masthead .lead {
+  	color:#aaaacc;
+}
+
+.navbar-bright li > a:hover {
+    background-color:#000033;
+}
+
+.affix-top,.affix{
+	position: static;
+}
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:228px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+  }
+}
+
+#sidebar li.active {
+  	border:0 #eee solid;
+  	border-right-width:4px;
+}
+
+#mainCol h2 {
+	padding-top: 55px;
+    margin-top: -55px;
+}
+
+ul.body-list li, ol.body-list li {
+	margin-left:50px;
+	margin-bottom: 20px;
+}
+</style>
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Handbook</h1>
+        </div>
+      </div> 
+  </div><!-- /cont -->
+</div>
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  			<div class="col-md-3" id="leftCol">
+              
+              	<ul class="nav nav-stacked" id="sidebar">
+                  <li><a href="#sec0">Introduction</a></li>
+                  <li><a href="#sec1">About the CDT</a></li>
+                  <li><a href="#sec2">Section 2</a></li>
+                  <li><a href="#sec3">Section 3</a></li>
+                  <li><a href="#sec4">Section 4</a></li>
+              	</ul>
+              
+      		</div>  
+      		<div class="col-md-9" id="mainCol">
+              
+              	<br>
+              
+              	<h2 id="sec0">Introduction</h2>
+				<p>Welcome to the Centre for Doctoral Training in New and Sustainable Photovoltaics. You are embarking on a unique PhD programme and by the time you attain your degree after four years you will have received bespoke training from seven of the UK's leading PV research groups, engaged with a very wide range of academic and industry experts within the field and formed an extensive network of colleagues and research contacts. Photovltaics is currently undergoing a rapid expandsion in the UK and following the attainment of your PhD you will be extremely well placed to begin a very rewarding carrer in this field should you choose</p>
+
+				<p>The following handbook has been put together to introduce you to the shape and style of the CDT and to provide an outlook of what is to be expected once you begin your studies. This handbook should be used in conjunction with you own institution's guidelines for PhD candidates <a href="">(Appendix A)</a>. Up to date information will also be on the website.</p>
+
+				<p>PhD students are a rich source of new ideas for any expanding field of research. Your contributions throughout your research and studies will be highly valued within the field of Photovlotaics.<p>
+           
+              	<hr class="col-md-12">
+
+				<h2 id="sec1">About the CDT</h2>
+				<p>This Centre for Doctoral training is part of a much broader UK research initiative funded by the Engineering and Physical Sciences Research Council (EPSRC). In total the EPSRC, in conjunction with University and Industry partners, has invested over £950m in 115 separate Centres with research focusses that included Advanced Materials, Energy, Healthcare and Manufacturing.</p>
+
+				<p>This CDT constitutes and investment of £8m shich will func at total of 65 students spread accross 5 distinct cohorts. This represents an unprecedented dedication to graduate training and the generation of new research within the field of photovoltaics<p>
+
+				<h3>Aims and Objectives</h3>
+				
+				
+				<p>The over-riding aim of the centre is to provide an enhanced and highly specialised training programme for doctoral students in the field of photovoltaics.  More specific objectives include:
+				    <ul class="body-list">
+						<li>Further improving the PhD experience through a cohort-based approach to student training</li>
+						<li>Exposing doctoral students to state of the art facilites and laboratories accross the UK and encouraging the development of multi-institutional collaborative research.</li>
+						<li>Creating future leaders within the next generation of scientists and engineers in the field of photovoltaics</li>
+						<li>Enhancing the mobility of researchers moving between academia and industry to promote the transfer of new knowledge and enable greater innovation in the economy.</li>
+						<li>Delivering research that enables the UK economy to develop and adopt sustainable, resource-efficient, low-carbon, low pollution and low-waste technologies.</li>
+					</ul>
+				<p>
+
+				<h3>Project Partners</h3>
+
+				<p>The CDT in New and Sustainable Photovoltaics is a multi-centre project that will operate accross 7 universities: Bath, Cambridge, Loughborough, Liverpool, Oxford, Sheffield and Southampton. Funding for the CDT is also coupled with industry support which will allow the centre's research outputs to have a direct impact on the skills and knowledge base of the energy sector. To date, the consortium of companies involved in the centre includes BAE systems, Eight19, Echerkon, LSA Ltd, SiliconCPV, Ossila, Oxford PV, PowerVision, M-Sovl, McCamley Middle East Ltd and Taylor Hobson.<p>
+
+              	<hr class="col-md-12">
+
+				<h2 id="sec2">You and Your Supervisor</h2>
+
+				<p>The student-supervisor relationship is a key element in your success as a PhD student. It is important that both you and supervisor make sufficient effort to maintain a good relationship throughout your studies. Here are a list of guidelines as to what you can expect from your supervisor and in turn what your supervisor can expect from you. The supervisor's defined role will will vary between institutions and remember that the relationship between you and your supervisor will be unique.</p>
+
+				<h3>What you can expect from your supervisor</h3>
+
+				<ol>
+					<li><u>Regular contact:</u> You can expect either formal or informal interaction with your supervisor on a regular basis, e.g. once a week (although once a fortnight is not unheard of).</li>
+				</ol>
+
+
+
+              	Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut.              
+              	Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut!
+              	
+              
+              
+              	<h2 id="sec1">Content</h2>
+              	<p>
+                Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut.
+              	</p>
+              	<div class="row">
+                  <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading"><h3>Hello.</h3></div>
+                      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+                      Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+                      dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+                      Aliquam in felis sit amet augue.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="panel panel-default">
+                      <div class="panel-heading"><h3>Hello.</h3></div>
+                      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+                      Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+                      dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+                      Aliquam in felis sit amet augue.
+                      </div>
+                    </div>
+                  </div>  
+              	</div>
+              
+              	<hr>
+              
+              	<h2 id="sec2">Section 2</h2>
+              	<p>
+                Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut!
+              	</p>
+              	<div class="row">
+              		<div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+                  	<div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+                  	<div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+              	</div>
+              
+              	<hr>
+              
+              	<h2 id="sec3">Section 3</h2>
+      			Images are responsive sed @mdo but sum are more fun peratis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+              
+              	<h2 id="sec4">Section 4</h2>
+      			Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+              
+              
+              	<hr>
+              <h4><a href="http://bootply.com/75781">Edit on Bootply</a></h4>
+              	<hr>
+              	
+              	
+      		</div> 
+  	</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$('#sidebar').affix({
+      offset: {
+        top: 245
+      }
+});
+
+var $body   = $(document.body);
+var navHeight = $('.navbar').outerHeight(true) + 10;
+
+$body.scrollspy({
+	target: '#leftCol',
+	offset: navHeight
+});
+</script>
+{% endblock %}

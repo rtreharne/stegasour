@@ -6,6 +6,9 @@ from profiles.models import Academic
 def home(request):
 	return render(request, 'home.html', {})
 
+def handbook(request):
+	return render(request, 'handbook.html', {})
+
 def researchers(request):
     projects = Project.objects.order_by('researcher__last_name')[:]
     cohorts = Cohort.objects.all()
