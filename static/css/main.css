@@ -525,4 +525,54 @@ hr.score {
 .cohort-section:nth-of-type(even){
 	background: #eee;
 }
+
+/* ------------ core-level training ----- */
+
+img.module-pic {
+	width: 100%;
+}
+
+div.training-box {
+	padding-bottom: 20px;
+}
+
+div.module-title {
+	text-align:left;
+	background:#a7abab;
+	color:#fff;
+	padding: 5px;
+}
+
+div.module-date {
+	text-align:right;
+	background:#29455e;
+	color:#fff;
+	padding:5px;
+}
+
+
+#masthead {
+	min-height:100px;
+	background-color:#334d64;
+  	color:#fff;
+	padding-top: 5px;
+}
+
+#masthead h1 {
+	font-size: 55px;
+	line-height: 1;
+}
+
+#masthead .well {
+	margin-top:13%;
+	background-color:#111155;
+  	border-color:#000033;
+}
+
+@media (min-width: 979px) {
+	#masthead {
+		min-height: 150px;
+		padding-top: 50px;
+	}
+
 }

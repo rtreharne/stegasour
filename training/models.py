@@ -3,13 +3,16 @@ from profiles.models import Academic, Researcher
 from datetime import date
 from sorl.thumbnail import ImageField
 from datetime import datetime
+from profiles.models import Partner
 
 class Module(models.Model):
     name = models.CharField(max_length=128)
+    location = models.ForeignKey(Partner)
     tag = models.CharField(max_length=10)
     description = models.TextField(max_length=1000)
     coordinator = models.OneToOneField(Academic)
     start = models.DateField(default=date.today)
+    finish = models.DateField(default=date.today)
     accommodation = models.TextField(max_length=1000, blank=True)
     module_map = models.TextField(max_length=1000, blank=True)
     pic = ImageField(upload_to='module_img', default = 'module_img/default.jpg')

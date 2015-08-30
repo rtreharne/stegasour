@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^handbook/$', 'cdtpv.views.handbook', name='handbook'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('profiles.urls')),
+    url(r'^training/', include('training.urls')),
     url(r'^directory/researchers/', 'cdtpv.views.researchers', name='researchers'),
     url(r'^directory/academics/', 'cdtpv.views.academics', name='academics'),
 )
