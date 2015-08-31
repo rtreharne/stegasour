@@ -19,9 +19,11 @@
 						{% for module in modules %}
 						<div class="col-lg-4 col-sm-6">
 							<div class="training-box">
-								{% thumbnail module.pic "500x300" crop="center" as im %}
-								<img class="module-pic" src="{{im.url}}">
-								{% endthumbnail %}
+								<a href="/training/core-level/{{ module.id }}/">
+									{% thumbnail module.pic "500x300" crop="center" as im %}
+									<img class="module-pic" src="{{im.url}}">
+									{% endthumbnail %}
+								</a>
 								<div class="module-title">
 									{{ module.name }} (<a href="https://twitter.com/hashtag/{{ module.tag }}" target="_blank">#{{ module.tag }}</a>)
 								</div>

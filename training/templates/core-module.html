@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+
+<style>
+body {
+	padding-top:50px;
+	text-align:justify;
+	font-size: 1.6em;
+}
+
+h4 {
+	font-weight: bold;
+}
+
+#masthead {
+	min-height:100px;
+	background-color:#334d64;
+  	color:#fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#masthead h1 {
+	font-size: 40px;
+	line-height: 1;
+}
+
+#masthead .well {
+	margin-top:13%;
+	background-color:#111155;
+  	border-color:#000033;
+}
+
+.icon-bar {
+	background-color:#fff;
+}
+
+.navbar-bright {
+	background-color:#111155;
+    color:#fff;
+}
+  
+.navbar-bright a, #masthead a, #masthead .lead {
+  	color:#aaaacc;
+}
+
+.navbar-bright li > a:hover {
+    background-color:#000033;
+}
+
+.affix-top,.affix{
+	position: static;
+}
+  #sidebar.affix-top {
+  	margin-top:20px;
+  }
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:228px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+  }
+
+	#masthead {
+		min-height: 150px;
+		padding-top: 50px;
+	}
+
+}
+
+
+#sidebar li.active {
+  	border:0 #eee solid;
+  	border-right-width:4px;
+}
+
+#mainCol h2 {
+	padding-top: 55px;
+    margin-top: -55px;
+}
+
+ul.body-list li, ol.body-list li {
+	margin-left:30px;
+	margin-bottom: 20px;
+	margin-top:20px;
+}
+
+</style>
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+			<h1 style="text-align:left;">{{ module.name  }}</h1>
+        </div>
+      </div> 
+  </div><!-- /cont -->
+</div>
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  			<div class="col-md-3" id="leftCol">
+              
+              	<ul class="nav nav-stacked" id="sidebar">
+                  <li><a href="#summary">Module Summary</a></li>
+                  <li><a href="#resources">Resources</a></li>
+				  {% if student %}
+                  <li><a href="#assessment">Assessment</a></li>
+				  {% endif %}
+                  <li><a href="#accommodation">Accommodation</a></li>
+				  <li><a href="#map">Map</a></li>
+              	</ul>
+              
+      		</div>  
+
+      		<div class="col-md-9" id="mainCol">
+
+				<br>
+
+				<div class="col-md-7">
+					<h2 id="summary">Module Summary</h2>
+					<h3>{{ module.location }}</h3>
+					<h4>{{ module.start|date:'M d' }} - {{module.finish|date:'M d Y' }}</h4>
+					<hr>
+					<p>{{ module.description }}</p>
+				</div>
+				
+				<div class="col-md-5 center">
+					<h3 class="center">{{ module.coordinator.title }} {{ module.coordinator.first_name}} {{ module.coordinator.last_name}}</h3>
+					<p>(Module Leader)</p>
+					{% thumbnail module.coordinator.pic "150x150" crop="center" as im %}
+					<a href="/user/profile/academic/{{ module.coordinator.id }}/">
+						<img class="profile-pic-lg" src="{{im.url}}" >
+					</a>
+					{% endthumbnail %}
+
+					{% thumbnail module.coordinator.affiliation.logo "200x200" as im %}
+					<img class="partner-logo" src="{{im.url}}">
+					{% endthumbnail %}
+				<p>
+					{% if module.coordinator.url %}
+					<a href="{{module.coordinator.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
+					{% endif %}
+					{% if module.coordinator.linkedIn %}
+					<a href="{{module.coordinator.linkedIn}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+					{% endif %}
+					{% if module.coordinator.twitter %}
+					<a href="{{module.coordinator.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+					{% endif %}
+				</p>
+				</div>
+
+              	<hr class="col-md-12">
+
+				<div class="col-md-7">
+				<h2>Resources</h2>
+
+
+				{% for element in elements %}
+				<h3>{{ element.title }}</h3>
+				  
+					<ul class="resource-list body-list">
+						{% for resource in resources %}
+						    {% if resource.element == element %}
+							<li>
+							{% if resource.upload %}
+								<a href="/media/{{resource.upload}}" target="_blank">{{ resource.name }}</a>
+							{% else %}
+								<a href="{{resource.URL}}" target="_blank">{{ resource.name }}</a>
+							{% endif %}
+							</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+
+				{% endfor %}
+			</div>
+
+			{% if student %}
+			<div class="col-md-5">
+			    <h2 id="assessment">Assessment</h2>
+				<table class="tg">
+				  <tr>
+					<th class="tg-031e">Title</th>
+					<th class="tg-031e">Deadline</th>
+					<th class="tg-031e">Points</th>
+					<th class="tg-031e">Submitted?</th>
+				  </tr>
+				{% for assessment in assessments %}
+				  <tr>
+					  <td class="tg-031e">{{ assessment.title }}</td>
+					  <td class="tg-031e">{{ assessment.deadline|date:'H:i d M' }}</td>
+					<td class="tg-031e">{{ assessment.points }}</td>
+					<td class="tg-031e">
+					{% for submission in submissions %}
+					    {% if submission.assessment.id == assessment.id %}
+						<i class="fa fa-check"></i>
+						{% else %}
+						<a class="btn btn-primary page-scroll" style="width: auto;" href="/training/submission/{{ module.id }}/{{ assessment.id }}/">Submit</a>
+						{% endif %}
+					{% endfor %}
+					</td>
+				  </tr>
+				{% endfor %}
+				</table>
+			</div>
+			{% endif %}
+
+
+
+              	
+      		</div> 
+  	</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$('#sidebar').affix({
+      offset: {
+        top: 245
+      }
+});
+
+var $body   = $(document.body);
+var navHeight = $('.navbar').outerHeight(true) + 10;
+
+$body.scrollspy({
+	target: '#leftCol',
+	offset: navHeight
+});
+</script>
+{% endblock %}

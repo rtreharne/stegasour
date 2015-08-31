@@ -61,6 +61,7 @@ class Resource(models.Model):
     resource_type = models.ForeignKey(Resource_Type)
     upload = models.FileField(upload_to='resources/', blank=True, null=True)
     URL = models.URLField(blank=True)
+    embed = models.CharField(max_length=5000, blank=True, null=True)
     CHOICE = (
         (u'1', u'YES'),
         (u'2', u'NO'),

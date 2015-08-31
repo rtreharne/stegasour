@@ -465,9 +465,12 @@ p.share {
 	width: 80%;
 }
 
+div.iframe{
+	border: 1px solid #eee;
+}
+
 iframe {
 	width: 100%;
-	height: 480px;
 	margin-bottom: 20px;
 }
 img.dinner-logo {
@@ -478,6 +481,26 @@ img.dinner-logo {
 
 div.navbar-collapse.navbar-ex1-collapse.collapse.in {
 	max-height: 380px;
+}
+
+.navbar-brand {
+	padding:0px 15px;
+}
+
+.navbar-brand img {
+	height:100%;
+}
+
+div.brand-image {
+	background: url(/static/img/logo_blue_noweb_icon2.jpg) 0 0 no-repeat;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	margin:0;
+}
+
+div.brand-image:hover {
+	background: url(/static/img/logo_blue_noweb_icon2.jpg) 0 -40px no-repeat;
 }
 
 /* ---------project plot -----------*/
@@ -576,3 +599,16 @@ div.module-date {
 	}
 
 }
+
+/*----------core-module-------*/
+ul.resource-list {
+	list-style-type:none;
+	text-align:left;
+}
+h3 {
+	text-align:left;
+}
+
+.tg  {width:100%; border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
