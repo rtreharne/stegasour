@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load static %}
+{% load app_filters %}
 
 {% block content %}
 
@@ -196,28 +197,29 @@ ul.body-list li, ol.body-list li {
 					<th class="tg-031e">Points</th>
 					<th class="tg-031e">Submitted?</th>
 				  </tr>
-				{% for assessment in assessments %}
+				{% for assessment, submission in magic_list %}
 				  <tr>
 					  <td class="tg-031e">{{ assessment.title }}</td>
 					  <td class="tg-031e">{{ assessment.deadline|date:'H:i d M' }}</td>
-					<td class="tg-031e">{{ assessment.points }}</td>
-					<td class="tg-031e">
-					{% for submission in submissions %}
-					    {% if submission.assessment.id == assessment.id %}
-						<i class="fa fa-check"></i>
-						{% else %}
-						<a class="btn btn-primary page-scroll" style="width: auto;" href="/training/submission/{{ module.id }}/{{ assessment.id }}/">Submit</a>
-						{% endif %}
-					{% endfor %}
-					</td>
+   					  <td class="tg-031e">{{ assessment.points }}, {{submission}}</td>
+					  <td class="tg-031e">
+					  {% if submission %}
+
+
+                            <a href="/training/resubmission/{{module.id}}/{{assessment.id}}/">
+                                <i class="fa fa-check"></i>
+                            </a>
+
+					  {% else %}
+
+                            <a class="btn btn-primary page-scroll" style="width: auto;" href="/training/submission/{{ module.id }}/{{ assessment.id }}/">Submit</a>
+					 {% endif %}
+				      </td>
 				  </tr>
 				{% endfor %}
 				</table>
 			</div>
 			{% endif %}
-
-
-
               	
       		</div> 
   	</div>

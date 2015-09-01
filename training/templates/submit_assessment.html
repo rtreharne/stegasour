@@ -8,7 +8,7 @@
 					<h2>Submit Assessment</h2>
 					<h3 class="center">{{ assessment.title }}</h3>
 
-					<form id = "upload_form" method="post" action="/training/submission/{{ assessment.id }}/" enctype="multipart/form-data">
+					<form id = "upload_form" method="post" action="/training/submission/{{ assessment.element.module.id }}/{{ assessment.id }}/" enctype="multipart/form-data">
 
 						{% csrf_token %}
 

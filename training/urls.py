@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     url(r'^core-level/$', 'training.views.core_level_training', name='core-level'),
     url(r'^core-level/(?P<module_id>\d+)/$', 'training.views.core_module', name='core-module'),
     url(r'^submission/(?P<module_id>\d+)/(?P<assessment_id>\d+)/$', 'training.views.submit_assessment', name='submit-assessment'),
+    url(r'^resubmission/(?P<module_id>\d+)/(?P<assessment_id>\d+)/$', 'training.views.resubmit_assessment', name='submit-assessment'),
 	
 )
