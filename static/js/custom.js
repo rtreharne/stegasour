@@ -1,9 +1,13 @@
-(function ($) {
-	$( '#dl-menu' ).dlmenu();
-	$('ul.dl-menu li a').smoothScroll();
+$('#sidebar').affix({
+      offset: {
+        top: 245
+      }
+});
 
+var $body   = $(document.body);
+var navHeight = $('.navbar').outerHeight(true) + 10;
 
-	//animation
-	new WOW().init();
-
-})(jQuery);
+$body.scrollspy({
+	target: '#leftCol',
+	offset: navHeight
+});

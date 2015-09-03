@@ -38,38 +38,42 @@ def user_login(request):
             return render(request, 'login.html', {'invalid': invalid})
 
 def dashboard(request):
-    researcher=False
-    academic=False
-    portfolio=None
-    submissions=None
-    feedback = []
-    try:
-        profile = Researcher.objects.get(user=request.user)
-        projects = Project.objects.get(researcher=profile)
-        portfolio = Upload.objects.filter(researcher=profile)
-        types = Upload_Type.objects.all()
-        folio = {}
-        submissions = Submission.objects.filter(researcher=profile)
-        feedback = Feedback.objects.all()
-        for type in types:
-            folio[type.name] =  portfolio.filter(type=type)
-        researcher = True
-        portfolio = folio
-    except ObjectDoesNotExist:
-        profile = Academic.objects.get(user=request.user)
-        projects = Project.objects.filter(supervisor1=profile)
-        academic = True
 
-    prof_dict = {'profile': profile, 
-                 'projects': projects,
-                 'academic': academic,
-                 'researcher': researcher,
-                 'portfolio': portfolio,
-                 'submissions': submissions,
-                 'feedback': feedback}
-                 
+    if request.user.is_authenticated():
+        researcher=False
+        academic=False
+        portfolio=None
+        submissions=None
+        feedback = []
+        try:
+            profile = Researcher.objects.get(user=request.user)
+            projects = Project.objects.get(researcher=profile)
+            portfolio = Upload.objects.filter(researcher=profile)
+            types = Upload_Type.objects.all()
+            folio = {}
+            submissions = Submission.objects.filter(researcher=profile)
+            feedback = Feedback.objects.all()
+            for type in types:
+                folio[type.name] =  portfolio.filter(type=type)
+            researcher = True
+            portfolio = folio
+        except ObjectDoesNotExist:
+            profile = Academic.objects.get(user=request.user)
+            projects = Project.objects.filter(supervisor1=profile)
+            academic = True
 
-    return render(request, 'dashboard.html', prof_dict)
+        prof_dict = {'profile': profile, 
+                     'projects': projects,
+                     'academic': academic,
+                     'researcher': researcher,
+                     'portfolio': portfolio,
+                     'submissions': submissions,
+                     'feedback': feedback}
+                     
+
+        return render(request, 'dashboard.html', prof_dict)
+    else:
+        return HttpResponseRedirect(reverse('home'))
 
 def user_logout(request):
     logout(request)
@@ -190,12 +194,22 @@ def edit_portfolio_item(request, upload_id=1):
 def researcher_profile(request, profile_id):
     
     researcher=True
+    loggedin = False
     profile = Researcher.objects.get(id=profile_id)
     projects = Project.objects.get(researcher=profile)
     portfolio = Upload.objects.filter(researcher=profile)
     types = Upload_Type.objects.all()
     folio = {}
     
+    if request.user.is_authenticated():
+        try:
+            if profile == Researcher.objects.get(user=request.user):
+                loggedin = True
+        except ObjectDoesNotExist:
+            loggedin = False
+    else:
+        loggedin=False
+
     for type in types:
         folio[type.name] =  portfolio.filter(type=type)
     
@@ -204,10 +218,11 @@ def researcher_profile(request, profile_id):
     prof_dict = {'profile': profile, 
                  'projects': projects,
                  'researcher': researcher,
-                 'portfolio': portfolio}
+                 'portfolio': portfolio,
+                 'loggedin': loggedin}
                  
 
-    return render(request, 'profile.html', prof_dict)
+    return render(request, 'dashboard.html', prof_dict)
 
 def academic_profile(request, profile_id):
     academic=True
@@ -216,10 +231,18 @@ def academic_profile(request, profile_id):
     projects2 = Project.objects.filter(supervisor2=profile)
     projects = list(chain(projects1, projects2))
     academic = True
+    loggedin = False
+
+    try:
+        if profile == Researcher.objects.get(user=request.user):
+            loggedin = True
+    except ObjectDoesNotExist:
+        loggedin = False
 
     prof_dict = {'profile': profile, 
                  'projects': projects,
-                 'academic': academic}
+                 'academic': academic,
+                 'loggedin': loggedin}
                  
 
-    return render(request, 'profile.html', prof_dict)
+    return render(request, 'dashboard.html', prof_dict)

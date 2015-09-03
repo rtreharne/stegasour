@@ -78,8 +78,8 @@ def submit_assessment(request, module_id=1, assessment_id=1):
             if 'file' in request.FILES:
                 submission.file = request.FILES['file']
 
-                submission.save()
-                return HttpResponseRedirect('/training/core-level/%s/#assessment' % (module_id))
+            submission.save()
+            return HttpResponseRedirect('/training/core-level/%s/#assessment' % (module_id))
 
         else:
             print upload_form.errors

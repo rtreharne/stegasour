@@ -313,7 +313,6 @@ div.bio-block {
 }
 
 div.block {
-	overflow:hidden;
 }
 
 .dashboard-profile-section {
@@ -460,7 +459,7 @@ form span{
 	line-height:2em;
 }
 /*------------TABLES-----------*/
-.tg  {width:100%; border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
 .tg td{text-align:center;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
 .tg th{text-align:center;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
 .tg .tg-4eph{background-color:#f9f9f9}

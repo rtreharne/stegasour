@@ -26,8 +26,11 @@
 			  {% if portfolio %}
 			  <li><a href="#portfolio">Portfolio</a></li>
 			  {% endif %}
-			  {% if researcher %}
+			  {% if researcher and loggedin %}
 			  <li><a href="#assessment">Assessment</a></li>
+			  {% endif %}
+			  {% if academic %}
+			  <li><a href="#my-students">My Students</a></li>
 			  {% endif %}
 			</ul>
 		<hr>
@@ -38,40 +41,40 @@
 		
 		<!---PROFILE--->
 		<div class="col-md-9 block" id="mainCol">
-			<div class="col-sm-4 profile-block" id="profile">
-					<h2>{{profile.first_name}} {{profile.last_name}}</h2>
-					<h4><a href="/directory/researchers/#{{projects.cohort.id}}/">{{ projects.cohort }}</a></h4>
-					{% thumbnail profile.pic "150x150" crop="center" as im %}
-					<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
-					{% endthumbnail %}
+			<div class="col-md-12 block">
+				<div class="col-sm-4 profile-block" id="profile">
+						<h2>{{profile.first_name}} {{profile.last_name}}</h2>
+						<h4><a href="/directory/researchers/#{{projects.cohort.id}}/">{{ projects.cohort }}</a></h4>
+						{% thumbnail profile.pic "150x150" crop="center" as im %}
+						<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
+						{% endthumbnail %}
 
-					{% thumbnail profile.affiliation.logo "200x200" as im %}
-					<img class="partner-logo" src="{{im.url}}">
-					{% endthumbnail %}
-					
-                    {% if researcher %}
-                    {% endif %}
-					<p>
-						{% if profile.url %}
-						<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
+						{% thumbnail profile.affiliation.logo "200x200" as im %}
+						<img class="partner-logo" src="{{im.url}}">
+						{% endthumbnail %}
+						
+						{% if researcher %}
 						{% endif %}
-						{% if profile.linkedIn %}
-						<a href="{{profile.linkedIn}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
-						{% endif %}
-						{% if profile.twitter %}
-						<a href="{{profile.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
-						{% endif %}
-					</p>
-			</div>
+						<p>
+							{% if profile.url %}
+							<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
+							{% endif %}
+							{% if profile.linkedIn %}
+							<a href="{{profile.linkedIn}}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+							{% endif %}
+							{% if profile.twitter %}
+							<a href="{{profile.twitter}}" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+							{% endif %}
+						</p>
+				</div>
 
-			<div class="col-sm-8 bio-block">
-				{% if profile.bio %}
-				<p class="bio">{{profile.bio}}</p>
-				{% else %}
-				<p>[No bio added]</p>
-				{% endif %}
-				<div class="col-lg-12">
-					<a class="btn btn-primary page-scroll" href="/user/update_profile/">Update Profile</a>
+				<div class="col-sm-8 block bio-block">
+					<p class="bio">{{profile.bio}}</p>
+					{% if loggedin %}
+					<div class="col-lg-12">
+						<a class="btn btn-primary page-scroll" href="/user/update_profile/">Update Profile</a>
+					</div>
+					{% endif %}
 				</div>
 			</div>
 
@@ -88,12 +91,12 @@
 					<h3 class="left">{{ projects.title }}</h3>
 					{% if projects.description %}
 					<div class="bio">{{ projects.description|linebreaks }}</div>
-					{% else %}
-					<p>[No project description added]</p>
 					{% endif %}
+					{% if researche and loggedin %}
 					<div class="col-lg-12" style="padding-left:0px">
 						<a class="btn btn-primary page-scroll" href="/user/update_project/">Update Project</a>
 					</div>
+					{% endif %}
 				</div>
 
 				<div class="col-sm-4 supervisors">
@@ -105,9 +108,11 @@
 						<p>{{ projects.supervisor1.title}} {{projects.supervisor1.first_name}} {{projects.supervisor1.last_name}}</p>
 						{% endthumbnail %}
 					</div></a>
+					
+					{% if projects.supervisor2 %}
+					
 					<a href="/user/profile/academic/{{projects.supervisor2.id}}/">
 					<div class="supervisor">
-						{% if projects.supervisor2 %}
 						{% thumbnail projects.supervisor2.pic "150x150" crop="center" as im %}
 						<img class="profile-pic-sm" src="{{im.url}}" name="{{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}">
 						<p>{{ projects.supervisor2.title}} {{projects.supervisor2.first_name}} {{projects.supervisor2.last_name}}</p>
@@ -122,13 +127,14 @@
 			{% endif %}
 
 			<!---PORTFOLIO--->
-			{% if researcher %}
-			<div class="col-md-12 block" id="portfolio">
+			{% if researcher and portfolio %}
+			<div class="col-md-12" id="portfolio">
+				<div class="col-md-12">
 					<h2>Portfolio</h2>
 					<div class="portfolio">
 					{% if portfolio %}
 						<!--- Thesis ---!>
-						{% if portfolio.Thesis%}
+						{% if portfolio.Thesis %}
 						<h3>Thesis</h3>
 						<ul class="resource-list body-list">
 						   {% for item in portfolio.Thesis %}
@@ -226,43 +232,42 @@
 						   {% endfor %}
 						</ul>
 						{% endif %}
-					{% else %}
-					<p>[No portfolio items added]</p>
 					{% endif %}
 					</div>
 
 
+					{% if researcher and loggedin %}
 					<div class="col-lg-12 left">
 						<a class="btn btn-primary page-scroll" href="/user/add_portfolio_item">Add Item</a>
 					</div>
+					{% endif %}
+				</div>
 			</div>    
 			</br>
 			<hr class="col-lg-12">
 			{% endif %}
 
 
-			{% if researcher %}
+			{% if researcher and loggedin %}
 			<div class="col-md-12" id="assessment">
 			    <h2>Assessment</h2>
 				{% if submissions %}
 					<table class="tg">
 					  <tr>
-						<th class="tg-031e">Tag</th>
 						<th class="tg-031e">Title</th>
-						<th class="tg-031e">Element</th>
 						<th class="tg-031e">Module</th>
+						<th class="tg-031e">Location</th>
 						<th class="tg-031e">Points</th>
 						<th class="tg-031e">Submitted</th>
 						<th class="tg-031e">Feedback</th>
 					  </tr>
 					{% for submission in submissions %}
 					  <tr>
-						  <td class="tg-4eph">{{ submission.assessment.tag }}</td>
-						  <td class="tg-4eph">{{ submission.assessment.title }}</td>
-						  <td class="tg-4eph">{{ submission.assessment.element.tag }}</td>
-						  <td class="tg-4eph">{{ submission.assessment.element.module.tag }}</td>
+						  <td class="tg-4eph"><a href="https://twitter.com/hashtag/{{ submission.assessment.tag }}/">{{ submission.assessment.title }}</a></td>
+						  <td class="tg-4eph"><a href="/training/core-level/{{submission.assessment.element.module.id}}/">{{ submission.assessment.element.module}}</a></td>
+						  <td class="tg-4eph">{{ submission.assessment.element.module.location}}</td>
 						  <td class="tg-4eph">{{ submission.assessment.points }}</td>
-						  <td class="tg-4eph"><a href="/media/{{ submission.file}}" target="_blank"><i class="fa fa-file fa-2x"></i></a></td>
+						  <td class="tg-4eph"><i class="fa fa-check"></i></td>
 						  <td class="tg-4eph">{% for item in feedback %}{% if item.submission == submission %}<a href="feedback/{{item.id}}"><i class="fa fa-link fa-2x"></i></a>{% endif %}{% endfor %}</td>
 					  </tr>
 					{% endfor %}
@@ -280,7 +285,7 @@
 			    <h2>My Students</h2>
 				{% if projects  %}
 					{% for project in projects %}
-					<a href="/user/profile/researcher/{{project.researcher.id}}/"><div class="supervisor">
+					<a href="/user/profile/researcher/{{project.researcher.id}}/"><div class="col-md-3 col-sm-6 center supervisor">
 						{% thumbnail project.researcher.pic "150x150" crop="center" as im %}
 						<img class="profile-pic" src="{{im.url}}" name="{{project.researcher.first_name}} {{project.researcher.last_name}}">
 						<p>{{project.researcher.first_name}} {{project.researcher.last_name}}</p>
