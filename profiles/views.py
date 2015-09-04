@@ -45,6 +45,8 @@ def dashboard(request):
         portfolio=None
         submissions=None
         feedback = []
+        loggedin=True
+
         try:
             profile = Researcher.objects.get(user=request.user)
             projects = Project.objects.get(researcher=profile)
@@ -68,6 +70,7 @@ def dashboard(request):
                      'researcher': researcher,
                      'portfolio': portfolio,
                      'submissions': submissions,
+					 'loggedin': loggedin,
                      'feedback': feedback}
                      
 
@@ -89,9 +92,9 @@ def update_profile(request):
 
     if request.method == 'POST':
         profile_form = ProfileForm(data=request.POST, instance=inst)
+
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
-            profile.user= request.user
 
             if 'pic' in request.FILES:
                 profile.pic= request.FILES['pic']

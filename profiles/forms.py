@@ -10,7 +10,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Academic
-        fields = ('affiliation', 'pic', 'bio', 'url', 'linkedIn', 'twitter')
+        fields = ('user','affiliation', 'pic', 'bio', 'url', 'linkedIn', 'twitter')
 
 class ProjectForm(forms.ModelForm):
     

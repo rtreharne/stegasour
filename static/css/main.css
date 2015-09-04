@@ -151,13 +151,40 @@ div.supervisor {
 }
 
 .profile-pic {
-    max-width: 100px;
 	width: 70%;
 	margin-bottom: 10px;
     border-radius: 150px;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
 }
+
+div.profile-block{
+	display:table;
+}
+
+
+div.square-box {
+	color:white;
+	font-size:3em;
+    width: 70%;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    overflow: hidden;
+	display: inline-block;
+    background: #4679BD;
+	padding-top: 35%;
+	line-height: 0%;
+	padding-bottom:35%;
+	max-height:100px;
+}
+@media (min-width: 979px) {
+	div.square-block {
+		font-size:2em;
+	}
+}
+
+
 
 .profile-pic-lg {
     width: 150px;

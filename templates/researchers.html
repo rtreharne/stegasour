@@ -41,13 +41,24 @@
 				{% for project in projects %}
 				{% if project.cohort == cohort %}
 				<a href="/user/profile/researcher/{{project.researcher.id}}/">
-					<div "min-height: 110px;" class="col-md-3 col-sm-3 col-xs-4 center block">
+					<div class="col-md-3 col-sm-3 col-xs-4 center block">
+						{% if project.researcher.pic %}
 						{% thumbnail project.researcher.pic "150x150" crop="center" as im %}
 						<img class="profile-pic" src="{{im.url}}" name="{{project.researcher.user.first_name}} {{project.researcher.user.last_name}}">
 						<p>{{project.researcher.first_name}}
 						   </br>
 						   {{project.researcher.last_name}}</p>
 						{% endthumbnail %}
+						{% else %}
+						<div class="square-box">
+							{{project.researcher.first_name|slice:":1"}}{{project.researcher.last_name|slice:":1"}}
+							
+						</div>
+						<p>{{project.researcher.first_name}}
+
+						   </br>
+						   {{project.researcher.last_name}}</p>
+						{% endif %}
 					</div>
 				</a>
 				{% endif %}

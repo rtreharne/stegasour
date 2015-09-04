@@ -45,6 +45,7 @@
 				<div class="col-sm-4 profile-block" id="profile">
 						<h2>{{profile.first_name}} {{profile.last_name}}</h2>
 						<h4><a href="/directory/researchers/#{{projects.cohort.id}}/">{{ projects.cohort }}</a></h4>
+						{% if profile.pic %}
 						{% thumbnail profile.pic "150x150" crop="center" as im %}
 						<img class="profile-pic-lg" src="{{im.url}}" name="{{profile.user.first_name}} {{profile.user.last_name}}">
 						{% endthumbnail %}
@@ -52,9 +53,13 @@
 						{% thumbnail profile.affiliation.logo "200x200" as im %}
 						<img class="partner-logo" src="{{im.url}}">
 						{% endthumbnail %}
-						
-						{% if researcher %}
+						{% else %}
+						<div class="square-box">
+							{{profile.first_name|slice:":1"}}{{profile.last_name|slice:":1"}}
+							
+						</div>
 						{% endif %}
+						
 						<p>
 							{% if profile.url %}
 							<a href="{{profile.url}}" target="_blank"><i class="fa fa-globe fa-3x"></i></a>
@@ -92,7 +97,7 @@
 					{% if projects.description %}
 					<div class="bio">{{ projects.description|linebreaks }}</div>
 					{% endif %}
-					{% if researche and loggedin %}
+					{% if researcher and loggedin %}
 					<div class="col-lg-12" style="padding-left:0px">
 						<a class="btn btn-primary page-scroll" href="/user/update_project/">Update Project</a>
 					</div>
